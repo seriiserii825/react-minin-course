@@ -25,7 +25,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-[50vh] pb-10">
-      <pre>{isLoading ? "Loading..." : "stopLoading"}</pre>
       <div className="container mx-auto">
         {isLoading ? (
           <Preloader />

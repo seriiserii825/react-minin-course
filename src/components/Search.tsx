@@ -1,7 +1,9 @@
-import useProducts from "../hooks/useProducts";
+import { useSearch, useSetSearch } from "../storage/useProductsStorage";
 
 export default function Search() {
-  const { search, setSearch } = useProducts();
+  const search = useSearch();
+  const setSearch = useSetSearch();
+
   function onSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value.trim());
   }

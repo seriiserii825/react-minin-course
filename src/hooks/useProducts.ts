@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import type { IProduct, IProductsQuery } from "../interfaces/IProduct";
 import { productService } from "../services/productService";
+import { useSearch, useSetSearch } from "../storage/useProductsStorage";
 export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,7 +12,9 @@ export default function useProducts() {
   const [skip, setSkip] = useState<number>(0);
   const limit = 24;
   const [viewedProducts, setViewedProducts] = useState<number>(24);
-  const [search, setSearch] = useState<string>("");
+
+  const search = useSearch();
+  const setSearch = useSetSearch();
 
   useEffect(() => {
     const fetchProducts = async () => {
