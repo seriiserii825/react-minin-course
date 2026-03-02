@@ -40,3 +40,8 @@ export interface IReview {
   reviewerName: string;
   reviewerEmail: string;
 }
+
+export interface IProductsQuery {
+  limit?: number;
+  skip?: number;
+}

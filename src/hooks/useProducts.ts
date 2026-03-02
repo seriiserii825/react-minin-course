@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import type { IProduct } from "../interfaces/IProduct";
+import type { IProduct, IProductsQuery } from "../interfaces/IProduct";
 import { productService } from "../services/productService";
 export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -9,34 +9,34 @@ export default function useProducts() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [skip, setSkip] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(0);
-  const [viewedProducts, setViewedProducts] = useState<number>(0);
+  const limit = 24;
+  const [viewedProducts, setViewedProducts] = useState<number>(24);
 
   useEffect(() => {
+    setViewedProducts(skip + limit);
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+        const query: IProductsQuery = {
+          skip,
+          limit,
+        };
+        const res = await productService.getAll(query);
+        setProducts(res.products);
+        setTotal(res.total);
+        setSkip(res.skip);
+      } catch (e: unknown) {
+        const error = e as AxiosError;
+        setIsError(error.message);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      }
+    };
     fetchProducts();
-  }, []);
+  }, [skip]);
 
-  useEffect(() => {
-    setViewedProducts(limit);
-  }, [limit]);
-
-  async function fetchProducts() {
-    setIsLoading(true);
-    try {
-      const res = await productService.getAll();
-      setProducts(res.products);
-      setTotal(res.total);
-      setSkip(res.skip);
-      setLimit(res.limit);
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      setIsError(error.message);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    }
-  }
   return {
     products,
     isLoading,
@@ -46,6 +46,7 @@ export default function useProducts() {
     total,
     skip,
     limit,
+    setSkip,
     viewedProducts,
     setViewedProducts,
   };
