@@ -18,7 +18,7 @@ export default function ProductsGrid({ products, createProduct }: IProductsProps
           Create new product
         </button>
       </header>
-      <div className="grid grid-cols-4 gap-2 px-4 mx-auto">
+      <div className="grid grid-cols-4 gap-2 mx-auto">
         {products.map((product) => (
           <Product key={product.id} product={product} />
         ))}
