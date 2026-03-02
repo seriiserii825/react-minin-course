@@ -11,32 +11,32 @@ export default function FavoritesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<string | null>(null);
 
-  async function fetchFavoriteProducts(productId: number) {
-    setIsLoading(true);
-    try {
-      const res = await productService.getOne(String(productId));
-      setProducts((prev) => [...prev, res]);
-    } catch (error) {
-      console.error("Error fetching product:", error);
-      setIsError("Failed to load favorite products.");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const displayedProducts = products.filter((p) => favorites.includes(p.id));
 
   useEffect(() => {
-    favorites.forEach(async (productId) => {
-      await fetchFavoriteProducts(productId);
-    });
+    if (favorites.length === 0) {
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
+    Promise.all(favorites.map((id) => productService.getOne(String(id))))
+      .then((results) => setProducts(results))
+      .catch(() => setIsError("Failed to load favorite products."))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (isLoading) return <Preloader />;
   if (isError) return <p className="text-white text-center font-bold">{isError}</p>;
 
   return (
-    <>
+    <div className="pb-24">
       <h1 className="text-white text-center font-bold text-4xl">Favorites Page</h1>
-      <ProductsGrid products={products} total={products.length} viewedProducts={products.length} />
-    </>
+      <ProductsGrid
+        products={displayedProducts}
+        total={products.length}
+        viewedProducts={products.length}
+      />
+    </div>
   );
 }
