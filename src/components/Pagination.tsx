@@ -7,13 +7,10 @@ interface IPaginationProps {
 
 export default function Pagination({ total, skip, limit, onPageChange }: IPaginationProps) {
   const totalPages = Math.ceil(total / limit);
-  console.log(total, "total");
-  console.log(limit, "limit");
-  console.log("totalPages", totalPages);
   const currentPage = Math.floor(skip / limit) + 1;
 
   const prevNextButtonDefaultClasses =
-    "px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300";
+    "px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer";
   const prevButtonClasses =
     currentPage === 1
       ? `${prevNextButtonDefaultClasses} cursor-not-allowed opacity-50`
@@ -33,7 +30,12 @@ export default function Pagination({ total, skip, limit, onPageChange }: IPagina
   return (
     <div className="flex justify-center items-center gap-3 mt-6">
       <div className="flex justify-center mt-6 space-x-1">
-        <button className={prevButtonClasses}>Prev</button>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => onPageChange(currentPage - 1)}
+          className={prevButtonClasses}>
+          Prev
+        </button>
 
         {[...Array(totalPages)].map((_, index) => {
           const page = index + 1;
@@ -46,7 +48,12 @@ export default function Pagination({ total, skip, limit, onPageChange }: IPagina
             </button>
           );
         })}
-        <button className={nextButtonClasses}>Next</button>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => onPageChange(currentPage + 1)}
+          className={nextButtonClasses}>
+          Next
+        </button>
       </div>
     </div>
   );
