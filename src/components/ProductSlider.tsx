@@ -18,8 +18,9 @@ export default function ProductSlider({ images }: IProductSlider) {
       <div className="rounded-xl overflow-hidden border mb-4">
         <img
           src={images[currentIndex]}
+          key={images[currentIndex]}
           alt="Essence Mascara Lash Princess"
-          className="w-full h-96 object-contain bg-gray-50"
+          className="w-full h-96 object-contain bg-gray-50 animate-fade"
         />
       </div>
       {images && images.length > 1 && (

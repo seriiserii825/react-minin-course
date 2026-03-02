@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-fade: fade 500ms ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@animation fade {
+  animation: "fade 300ms ease-in-out";
+}
+
 @layer components {
   /* Базовый стиль для всех кнопок */
   .btn {
