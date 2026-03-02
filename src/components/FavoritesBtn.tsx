@@ -1,4 +1,8 @@
+import { useFavorites } from "../storage/useFavoritesStorage";
+
 export default function FavoritesBtn() {
+  const favorites = useFavorites();
+
   return (
     <button className="relative p-2.5 bg-white/20 hover:bg-white/30 rounded-xl transition-colors text-white cart-bounce">
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -10,7 +14,7 @@ export default function FavoritesBtn() {
         />
       </svg>
       <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 text-gray-900 text-[10px] font-bold rounded-full flex items-center justify-center">
-        2
+        {favorites.length}
       </span>
     </button>
   );

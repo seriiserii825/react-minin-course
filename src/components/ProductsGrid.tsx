@@ -11,7 +11,7 @@ interface IProductsProps {
   products: IProduct[];
   total: number;
   viewedProducts: number;
-  createProduct: () => void;
+  createProduct?: () => void;
 }
 
 export default function ProductsGrid({
@@ -58,9 +58,11 @@ export default function ProductsGrid({
           </span>
         </div>
 
-        <button className="px-6 text-white font-bold" onClick={() => createProduct()}>
-          + Create new product
-        </button>
+        {createProduct && (
+          <button className="px-6 text-white font-bold" onClick={() => createProduct()}>
+            + Create new product
+          </button>
+        )}
       </header>
       <div ref={containerRef} className="grid grid-cols-4 gap-2 mx-auto">
         {products.map((product) => (
