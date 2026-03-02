@@ -1,4 +1,5 @@
 import { axiosInstance } from "../axios/axiosInstance";
+import type { IProduct } from "../interfaces/IProduct";
 import type { IProductResponse } from "../interfaces/IProductResponse";
 
 export const productService = {
@@ -7,7 +8,7 @@ export const productService = {
     return data;
   },
   getOne: async (id: string) => {
-    const { data } = await axiosInstance.get(`/products/${id}`);
+    const { data } = await axiosInstance.get<IProduct>(`/products/${id}`);
     return data;
   },
 };

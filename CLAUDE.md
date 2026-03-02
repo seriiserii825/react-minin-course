@@ -19,14 +19,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-This is a product catalog app using static data from [dummyjson.com](https://dummyjson.com/products) format.
+Product catalog app that fetches live data from the [dummyjson.com](https://dummyjson.com/products) API.
 
-- `src/main.tsx` — React entry point (StrictMode, renders into `#root`)
-- `src/App.tsx` — Root component, renders a product grid layout
-- `src/components/` — UI components (e.g., `Product.tsx` takes an `IProduct` prop)
-- `src/interfaces/` — TypeScript interfaces (e.g., `IProduct.ts` mirrors the dummyjson product schema)
-- `src/data/` — Static data files (`products_data.ts`)
-- `src/utils/` — Utility functions (e.g., `formatPrice.ts` uses `Intl.NumberFormat`)
+### Data flow
+
+`src/axios/axiosInstance.ts` (baseURL: `https://dummyjson.com`) → `src/services/productService.ts` (typed API methods: `getAll`, `getOne`) → `src/hooks/useProducts.ts` (manages loading/error state) → page/component
+
+### Routing (React Router v7)
+
+`main.tsx` renders `<BrowserRouter>` wrapping both `<MainHeader>` and `<App>`. Header is always visible. Routes in `App.tsx`:
+- `/` → `HomePage` (product grid via `useProducts`)
+- `/products/:id` → `SingleProductPage` (fetches single product; currently has placeholder UI pending full implementation)
+- `/favorites` → `FavoritesPage`
+- `*` → `NotFoundPage`
+
+### Key directories
+
+- `src/pages/` — Route-level components
+- `src/components/` — Shared UI (e.g., `ProductsGrid`, `Modal`, `Preloader`, `Search`, `CreateProduct`)
+- `src/hooks/` — Custom hooks (`useProducts` owns modal state too)
+- `src/services/` — API service layer
+- `src/interfaces/` — TypeScript interfaces mirroring dummyjson schema (`IProduct`, `IProductResponse`)
+- `src/data/` — Static fallback data (`products_data.ts`)
+- `src/utils/` — `formatPrice.ts` using `Intl.NumberFormat`
 
 ## Styling
 
