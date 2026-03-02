@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import IconLike from "../icons/IconLike";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
-import { Link } from "react-router-dom";
-import FavoritesBtn from "./FavoritesBtn";
-import IconLike from "../icons/IconLike";
+import { useFavorites } from "../storage/useFavoritesStorage";
 
 interface ProductProps {
   product: IProduct;
@@ -11,6 +11,8 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const [isVisibleDetails, setIsVisibleDetails] = useState(false);
+
+  const favorites = useFavorites();
 
   const btnClassName = isVisibleDetails
     ? "bg-indigo-600 text-white hover:bg-indigo-700 hover:text-white"
@@ -40,7 +42,7 @@ export default function Product({ product }: ProductProps) {
           {product.category}
         </span>
         <span className="absolute top-2 right-3 w-8 h-10 text-white text-xs font-medium">
-          <IconLike />
+          <IconLike isFavorite={favorites.includes(product.id)} productId={product.id} />
         </span>
       </div>
 

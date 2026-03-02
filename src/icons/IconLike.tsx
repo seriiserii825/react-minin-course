@@ -1,11 +1,11 @@
 import { useSetFavorites } from "../storage/useFavoritesStorage";
 
 interface IconLikeProps {
-  isFavorite?: boolean;
-  productId?: number;
+  isFavorite: boolean;
+  productId: number;
 }
 
-export default function IconLike({ isFavorite = false, productId: number }: IconLikeProps) {
+export default function IconLike({ isFavorite = false, productId }: IconLikeProps) {
   const fillColor = "#ccc"; // Default color for non-favorite
   const favoriteFillColor = "#ff0000"; // Color for favorite (red)
   const currentFillColor = isFavorite ? favoriteFillColor : fillColor;
