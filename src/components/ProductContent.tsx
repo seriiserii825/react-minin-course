@@ -5,6 +5,7 @@ import {
 } from "@/store/useMiniCartStorage";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
+import toast from "react-hot-toast";
 
 interface IProductContentProps {
   product: IProduct;
@@ -22,6 +23,7 @@ export default function ProductContent({ product }: IProductContentProps) {
   function addToMiniCart() {
     setProductsToMiniCart(product);
     setIsOpen(true);
+    toast.success(`${product.title} added to cart`);
   }
 
   return (

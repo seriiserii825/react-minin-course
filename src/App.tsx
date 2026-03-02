@@ -5,7 +5,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SingleProductPage from "./pages/SingleProductPage";
-
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
@@ -16,6 +16,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <MiniCart />
+      <Toaster position="top-right" />
     </>
   );
 }

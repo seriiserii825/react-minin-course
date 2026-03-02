@@ -1,3 +1,4 @@
+import { IProduct } from "@/interfaces/IProduct";
 import {
   useIsMiniCartOpen,
   useMiniCartProducts,
@@ -5,6 +6,7 @@ import {
   useSetMiniCartProducts,
 } from "@/store/useMiniCartStorage";
 import formatPrice from "@/utils/formatPrice";
+import toast from "react-hot-toast";
 
 export default function MiniCart() {
   const isOpen = useIsMiniCartOpen();
@@ -24,6 +26,11 @@ export default function MiniCart() {
 
   function closeMiniCart() {
     setIsOpen(false);
+  }
+
+  function removeFromMiniCart(product: IProduct) {
+    setProductsToMiniCart(product);
+    toast.success(`${product.title} removed from cart`);
   }
 
   return (
@@ -55,7 +62,7 @@ export default function MiniCart() {
 
                   <div className="flex items-center gap-3 mt-2">
                     <button
-                      onClick={() => setProductsToMiniCart(product)}
+                      onClick={() => removeFromMiniCart(product)}
                       className="text-sm text-red-500 hover:underline cursor-pointer">
                       Remove
                     </button>
