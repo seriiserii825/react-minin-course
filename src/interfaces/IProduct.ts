@@ -45,4 +45,6 @@ export interface IProductsQuery {
   limit?: number;
   skip?: number;
   search?: string;
+  sortBy?: "price" | "rating" | "title";
+  order?: "asc" | "desc";
 }

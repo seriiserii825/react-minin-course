@@ -8,6 +8,8 @@ export const productService = {
     if (query.limit) queryString.append("limit", query.limit.toString());
     if (query.skip) queryString.append("skip", query.skip.toString());
     if (query.search) queryString.append("q", query.search);
+    if (query.sortBy) queryString.append("sortBy", query.sortBy);
+    if (query.order) queryString.append("order", query.order);
     const url = `/products?${queryString.toString()}`;
     const { data } = await axiosInstance.get<IProductResponse>(url);
     return data;

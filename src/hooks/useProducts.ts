@@ -26,6 +26,8 @@ export default function useProducts() {
         const query: IProductsQuery = {
           skip,
           limit,
+          sortBy: "price",
+          order: "desc",
         };
         const res = await productService.getAll(query);
         setProducts(res.products);
