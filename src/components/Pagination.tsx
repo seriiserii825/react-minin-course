@@ -10,15 +10,15 @@ export default function Pagination({ total, skip, limit, onPageChange }: IPagina
   const currentPage = Math.floor(skip / limit) + 1;
 
   const prevNextButtonDefaultClasses =
-    "px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer";
+    "px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300";
   const prevButtonClasses =
     currentPage === 1
       ? `${prevNextButtonDefaultClasses} cursor-not-allowed opacity-50`
-      : prevNextButtonDefaultClasses;
+      : `${prevNextButtonDefaultClasses} cursor-pointer`;
   const nextButtonClasses =
     currentPage === totalPages
       ? `${prevNextButtonDefaultClasses} cursor-not-allowed opacity-50`
-      : prevNextButtonDefaultClasses;
+      : `${prevNextButtonDefaultClasses} cursor-pointer`;
 
   const countedButtonDefaultClasses =
     "px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer";
