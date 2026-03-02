@@ -15,7 +15,7 @@ export interface IProduct {
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
-  reviews: Review[];
+  reviews: IReview[];
   returnPolicy: string;
   minimumOrderQuantity: number;
   meta: Meta;
@@ -33,7 +33,7 @@ export interface Meta {
   barcode: string;
   qrCode: string;
 }
-export interface Review {
+export interface IReview {
   rating: number;
   comment: string;
   date: string;
