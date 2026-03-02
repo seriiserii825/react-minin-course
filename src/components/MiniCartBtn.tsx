@@ -1,6 +1,12 @@
-export default function MiniCartBtn() {
+interface IMiniCartBtnProps {
+  onClick: () => void;
+}
+
+export default function MiniCartBtn({ onClick }: IMiniCartBtnProps) {
   return (
-    <button className="relative flex items-center gap-2 bg-white text-pink-600 font-semibold text-sm px-5 py-2.5 rounded-full shadow-lg hover:shadow-pink-300/40 hover:scale-105 transition-all cart-bounce">
+    <button
+      onClick={onClick}
+      className="relative cursor-pointer flex items-center gap-2 bg-white text-pink-600 font-semibold text-sm px-5 py-2.5 rounded-full shadow-lg hover:shadow-pink-300/40 hover:scale-105 transition-all cart-bounce">
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
