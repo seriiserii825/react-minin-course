@@ -24,7 +24,7 @@ export default function ProductSlider({ images }: IProductSlider) {
         />
       </div>
       {images && images.length > 1 && (
-        <div className="flex gap-3">
+        <div className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(100px,1fr))]">
           {images.map((imgUrl, index) => (
             <img
               key={index}
