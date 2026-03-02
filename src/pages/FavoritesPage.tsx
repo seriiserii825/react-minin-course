@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Preloader from "../components/Preloader";
 import type { IProduct } from "../interfaces/IProduct";
 import { productService } from "../services/productService";
-import { useFavorites } from "../storage/useFavoritesStorage";
+import { useFavorites } from "../store/useFavoritesStorage";
 import ProductsGrid from "../components/ProductsGrid";
 
 export default function FavoritesPage() {

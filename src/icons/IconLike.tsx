@@ -1,4 +1,4 @@
-import { useSetFavorites } from "../storage/useFavoritesStorage";
+import { useSetFavorites } from "../store/useFavoritesStorage";
 
 interface IconLikeProps {
   isFavorite: boolean;

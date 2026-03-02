@@ -32,7 +32,6 @@ export default function HomePage() {
   return (
     <div className="pb-10">
       <>
-        <ProductsOrder />
         <ProductsGrid
           createProduct={() => setIsModalOpen(true)}
           products={products}

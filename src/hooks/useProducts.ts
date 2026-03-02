@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import type { IProduct, IProductsQuery } from "../interfaces/IProduct";
 import { productService } from "../services/productService";
-import { useSearch, useSetSearch } from "../storage/useProductsStorage";
+import { useOrder, useSearch, useSetSearch, useSortBy } from "../store/useProductsStorage";
 import { useDebounce } from "./useDebounce";
 export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -16,6 +16,8 @@ export default function useProducts() {
 
   const search = useSearch();
   const setSearch = useSetSearch();
+  const sortBy = useSortBy();
+  const order = useOrder();
 
   const debouncedSearch = useDebounce(search, 500);
 
@@ -26,8 +28,8 @@ export default function useProducts() {
         const query: IProductsQuery = {
           skip,
           limit,
-          sortBy: "price",
-          order: "desc",
+          sortBy: sortBy === "all" ? undefined : sortBy,
+          order,
         };
         const res = await productService.getAll(query);
         setProducts(res.products);
@@ -45,7 +47,7 @@ export default function useProducts() {
     if (debouncedSearch === "") {
       fetchProducts();
     }
-  }, [skip, debouncedSearch]);
+  }, [skip, debouncedSearch, sortBy, order]);
 
   useEffect(() => {
     const fetchProducts = async () => {

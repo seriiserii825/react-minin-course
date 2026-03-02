@@ -1,4 +1,4 @@
-import { useFavorites } from "../storage/useFavoritesStorage";
+import { useFavorites } from "../store/useFavoritesStorage";
 
 export default function FavoritesBtn() {
   const favorites = useFavorites();

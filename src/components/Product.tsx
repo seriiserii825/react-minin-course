@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import IconLike from "../icons/IconLike";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
-import { useFavorites } from "../storage/useFavoritesStorage";
+import { useFavorites } from "../store/useFavoritesStorage";
 
 interface ProductProps {
   product: IProduct;

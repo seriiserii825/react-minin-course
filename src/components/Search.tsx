@@ -1,4 +1,4 @@
-import { useSearch, useSetSearch } from "../storage/useProductsStorage";
+import { useSearch, useSetSearch } from "../store/useProductsStorage";
 
 export default function Search() {
   const search = useSearch();

@@ -1,9 +1,10 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import type { IProduct } from "../interfaces/IProduct";
 import Product from "./Product";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import ProductsOrder from "./ProductsOrder";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,11 +59,7 @@ export default function ProductsGrid({
           </span>
         </div>
 
-        {createProduct && (
-          <button className="px-6 text-white font-bold" onClick={() => createProduct()}>
-            + Create new product
-          </button>
-        )}
+        <ProductsOrder />
       </header>
       <div ref={containerRef} className="grid grid-cols-4 gap-2 mx-auto">
         {products.map((product) => (
