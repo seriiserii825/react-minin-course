@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
+import { Link } from "react-router-dom";
 
 interface ProductProps {
   product: IProduct;
@@ -66,7 +67,9 @@ export default function Product({ product }: ProductProps) {
           <div className="flex flex-col">
             <span className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</span>
           </div>
-          <button className="btn btn-sm btn-primary">View</button>
+          <Link to={`/products/${product.id}`} className="btn btn-sm btn-primary">
+            View
+          </Link>
         </div>
       </div>
     </div>

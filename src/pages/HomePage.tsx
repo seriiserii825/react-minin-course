@@ -7,7 +7,7 @@ import useProducts from "../hooks/useProducts";
 export default function HomePage() {
   const { products, isLoading, isError, isModalOpen, setIsModalOpen } = useProducts();
   return (
-    <div className="pt-24  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+    <div className=" min-h-screen">
       <div className="container mx-auto">
         {isLoading ? (
           <Preloader />
