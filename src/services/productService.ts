@@ -6,4 +6,8 @@ export const productService = {
     const { data } = await axiosInstance.get<IProductResponse>(`/products?limit=12`);
     return data;
   },
+  getOne: async (id: string) => {
+    const { data } = await axiosInstance.get(`/products/${id}`);
+    return data;
+  },
 };

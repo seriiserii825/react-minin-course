@@ -1,4 +1,27 @@
+import { AxiosError } from "axios";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { productService } from "../services/productService";
+
 export default function SingleProductPage() {
+  const { id } = useParams();
+
+  async function fetchProduct() {
+    if (!id) return;
+    try {
+      const res = await productService.getOne(id);
+      console.log("res", res);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error("Error fetching product:", error.message);
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
   return (
     <div>
       <div className="max-w-6xl mx-auto p-6">
@@ -60,16 +83,6 @@ export default function SingleProductPage() {
               lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free
               formula.
             </p>
-
-            <div className="flex items-center gap-3">
-              <label className="text-sm text-gray-600">Quantity</label>
-              <input
-                type="number"
-                min="1"
-                value="1"
-                className="w-20 border rounded-lg px-3 py-2 text-center"
-              />
-            </div>
 
             <div className="flex gap-4 mt-4">
               <button className="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-medium hover:bg-indigo-700 transition">
