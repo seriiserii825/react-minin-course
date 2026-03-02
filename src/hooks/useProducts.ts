@@ -23,7 +23,6 @@ export default function useProducts() {
         const res = await productService.getAll(query);
         setProducts(res.products);
         setTotal(res.total);
-        setSkip(res.skip);
         setViewedProducts(res.skip + res.limit);
       } catch (e: unknown) {
         const error = e as AxiosError;
@@ -48,6 +47,5 @@ export default function useProducts() {
     limit,
     setSkip,
     viewedProducts,
-    setViewedProducts,
   };
 }

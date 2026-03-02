@@ -28,33 +28,31 @@ export default function Pagination({ total, skip, limit, onPageChange }: IPagina
       : countedButtonDefaultClasses;
 
   return (
-    <div className="flex justify-center items-center gap-3 mt-6">
-      <div className="flex justify-center mt-6 space-x-1">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => onPageChange(currentPage - 1)}
-          className={prevButtonClasses}>
-          Prev
-        </button>
+    <div className="flex justify-center space-x-1 mt-24">
+      <button
+        disabled={currentPage === 1}
+        onClick={() => onPageChange(currentPage - 1)}
+        className={prevButtonClasses}>
+        Prev
+      </button>
 
-        {[...Array(totalPages)].map((_, index) => {
-          const page = index + 1;
-          return (
-            <button
-              key={page}
-              className={countedButtonClasses(page)}
-              onClick={() => onPageChange(page)}>
-              {page}
-            </button>
-          );
-        })}
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => onPageChange(currentPage + 1)}
-          className={nextButtonClasses}>
-          Next
-        </button>
-      </div>
+      {[...Array(totalPages)].map((_, index) => {
+        const page = index + 1;
+        return (
+          <button
+            key={page}
+            className={countedButtonClasses(page)}
+            onClick={() => onPageChange(page)}>
+            {page}
+          </button>
+        );
+      })}
+      <button
+        disabled={currentPage === totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
+        className={nextButtonClasses}>
+        Next
+      </button>
     </div>
   );
 }
