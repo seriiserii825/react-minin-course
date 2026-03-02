@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import Footer from "./components/Footer.tsx";
 import MainHeader from "./components/MainHeader.tsx";
 import "./index.css";
+import MiniCart from "./components/MiniCart.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
         </div>
       </div>
       <Footer />
+      <MiniCart />
     </BrowserRouter>
   </StrictMode>,
 );
