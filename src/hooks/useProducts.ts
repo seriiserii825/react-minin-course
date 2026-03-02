@@ -1,7 +1,7 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import type { IProduct } from "../interfaces/IProduct";
-import type { IProductResponse } from "../interfaces/IProductResponse";
+import { productService } from "../services/productService";
 export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,8 +15,8 @@ export default function useProducts() {
   async function fetchProducts() {
     setIsLoading(true);
     try {
-      const res = await axios.get<IProductResponse>("https://dummyjson.com/products?limit=12");
-      setProducts(res.data.products);
+      const res = await productService.getAll();
+      setProducts(res.products);
     } catch (e: unknown) {
       const error = e as AxiosError;
       setIsError(error.message);
