@@ -3,6 +3,7 @@ import Modal from "../components/Modal";
 import Pagination from "../components/Pagination";
 import Preloader from "../components/Preloader";
 import ProductsGrid from "../components/ProductsGrid";
+import ProductsOrder from "../components/ProductsOrder";
 import useProducts from "../hooks/useProducts";
 
 export default function HomePage() {
@@ -31,6 +32,7 @@ export default function HomePage() {
   return (
     <div className="pb-10">
       <>
+        <ProductsOrder />
         <ProductsGrid
           createProduct={() => setIsModalOpen(true)}
           products={products}
