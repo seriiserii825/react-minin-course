@@ -1,4 +1,8 @@
-import { useIsMiniCartOpen, useSetIsMiniCartOpen } from "@/store/useMiniCartStorage";
+import {
+  useIsMiniCartOpen,
+  useMiniCartProducts,
+  useSetIsMiniCartOpen,
+} from "@/store/useMiniCartStorage";
 import { Link } from "react-router-dom";
 import FavoritesBtn from "./FavoritesBtn";
 import Logo from "./Logo";
@@ -9,6 +13,7 @@ import Search from "./Search";
 export default function MainHeader() {
   const setIsOpen = useSetIsMiniCartOpen();
   const isOpen = useIsMiniCartOpen();
+  const miniCartProducts = useMiniCartProducts();
   function toggleMiniCart() {
     setIsOpen(!isOpen);
   }
@@ -25,7 +30,10 @@ export default function MainHeader() {
 
           <div className="flex items-center gap-3 shrink-0 ml-auto lg:ml-0">
             <FavoritesBtn />
-            <MiniCartBtn onClick={toggleMiniCart} />
+            <MiniCartBtn
+              onClick={toggleMiniCart}
+              productsCount={miniCartProducts ? miniCartProducts.length : 0}
+            />
           </div>
         </div>
       </div>

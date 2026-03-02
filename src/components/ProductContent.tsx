@@ -1,3 +1,4 @@
+import { useSetMiniCartProducts } from "@/store/useMiniCartStorage";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
 
@@ -6,6 +7,8 @@ interface IProductContentProps {
 }
 
 export default function ProductContent({ product }: IProductContentProps) {
+  const setProductsToMiniCart = useSetMiniCartProducts();
+
   return (
     <div className="flex flex-col gap-5">
       <span className="w-fit px-4 py-1 rounded-full bg-indigo-600 text-white text-xs uppercase tracking-wide">
@@ -44,11 +47,10 @@ export default function ProductContent({ product }: IProductContentProps) {
       <p className="text-gray-700 leading-relaxed">{product.description}</p>
 
       <div className="flex gap-4 mt-4">
-        <button className="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-medium hover:bg-indigo-700 transition">
+        <button
+          onClick={() => setProductsToMiniCart(product)}
+          className="flex-1 cursor-pointer bg-indigo-600 text-white py-3 rounded-xl font-medium hover:bg-indigo-700 transition">
           Add to cart
-        </button>
-        <button className="flex-1 border border-indigo-600 text-indigo-600 py-3 rounded-xl font-medium hover:bg-indigo-50 transition">
-          Buy now
         </button>
       </div>
 

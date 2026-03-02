@@ -8,7 +8,7 @@ interface IActions {
 }
 
 interface IInitialState {
-  products: number[];
+  products: IProduct[];
   isOpen?: boolean;
 }
 
@@ -23,10 +23,10 @@ const productsStore: StateCreator<IProductsState> = (set) => ({
   ...initialState,
   setProducts: (value: IProduct) => {
     set((state) => {
-      const productIndex = state.products.findIndex((product) => product === value.id);
+      const productIndex = state.products.findIndex((product) => product.id === value.id);
 
       if (productIndex === -1) {
-        return { products: [...state.products, value.id] };
+        return { products: [...state.products, value] };
       } else {
         const updatedProducts = [...state.products];
         updatedProducts.splice(productIndex, 1);

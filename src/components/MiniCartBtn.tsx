@@ -1,8 +1,9 @@
 interface IMiniCartBtnProps {
   onClick: () => void;
+  productsCount: number;
 }
 
-export default function MiniCartBtn({ onClick }: IMiniCartBtnProps) {
+export default function MiniCartBtn({ productsCount, onClick }: IMiniCartBtnProps) {
   return (
     <button
       onClick={onClick}
@@ -17,7 +18,7 @@ export default function MiniCartBtn({ onClick }: IMiniCartBtnProps) {
       </svg>
       Корзина
       <span className="bg-pink-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-        5
+        {productsCount}
       </span>
     </button>
   );

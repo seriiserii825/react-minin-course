@@ -1,15 +1,32 @@
+import { useIsMiniCartOpen, useSetIsMiniCartOpen } from "@/store/useMiniCartStorage";
+
 export default function MiniCart() {
+  const isOpen = useIsMiniCartOpen();
+  const setIsOpen = useSetIsMiniCartOpen();
+
+  const asideClasses = `fixed top-0 left-0 z-50 h-full w-[360px] bg-white shadow-2xl
+    transform transition-transform duration-300 ease-out
+    ${isOpen ? "translate-x-0" : "-translate-x-full"}`;
+
+  const overlayClasses = `fixed inset-0 bg-black/60 z-40 transition-opacity duration-300
+    ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`;
+
+  function closeMiniCart() {
+    setIsOpen(false);
+  }
+
   return (
     <>
-      <div className="fixed inset-0 bg-black/40 z-40"></div>
+      <div onClick={closeMiniCart} className={overlayClasses}></div>
 
-      <aside
-        className="fixed top-0 left-0 z-50 h-full w-[360px] bg-white shadow-2xl
-         transform transition-transform duration-300 ease-out
-         translate-x-0">
+      <aside className={asideClasses}>
         <div className="flex items-center justify-between px-5 py-4 border-b">
           <h2 className="text-lg font-semibold">Cart (3)</h2>
-          <button className="text-gray-400 hover:text-black text-2xl leading-none">&times;</button>
+          <button
+            onClick={closeMiniCart}
+            className="text-gray-400 hover:text-black text-2xl leading-none cursor-pointer">
+            &times;
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
