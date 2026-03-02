@@ -15,12 +15,7 @@ interface IProductsProps {
   createProduct?: () => void;
 }
 
-export default function ProductsGrid({
-  products,
-  createProduct,
-  total,
-  viewedProducts,
-}: IProductsProps) {
+export default function ProductsGrid({ products, total, viewedProducts }: IProductsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
