@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { IProduct, IProductsQuery } from "../interfaces/IProduct";
 import { productService } from "../services/productService";
 import { useSearch, useSetSearch } from "../storage/useProductsStorage";
+import { useDebounce } from "./useDebounce";
 export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,6 +16,8 @@ export default function useProducts() {
 
   const search = useSearch();
   const setSearch = useSetSearch();
+
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -44,7 +47,7 @@ export default function useProducts() {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const res = await productService.search(search);
+        const res = await productService.search(debouncedSearch);
         setProducts(res.products);
         setTotal(res.total);
         setViewedProducts(res.skip + res.limit);
@@ -57,8 +60,8 @@ export default function useProducts() {
         }, 1000);
       }
     };
-    if (search) fetchProducts();
-  }, [search]);
+    if (debouncedSearch) fetchProducts();
+  }, [debouncedSearch]);
 
   return {
     products,
