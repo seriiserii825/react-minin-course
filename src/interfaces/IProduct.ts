@@ -44,4 +44,5 @@ export interface IReview {
 export interface IProductsQuery {
   limit?: number;
   skip?: number;
+  search?: string;
 }

@@ -11,6 +11,7 @@ export default function useProducts() {
   const [skip, setSkip] = useState<number>(0);
   const limit = 24;
   const [viewedProducts, setViewedProducts] = useState<number>(24);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,6 +37,26 @@ export default function useProducts() {
     fetchProducts();
   }, [skip]);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+        const res = await productService.search(search);
+        setProducts(res.products);
+        setTotal(res.total);
+        setViewedProducts(res.skip + res.limit);
+      } catch (e: unknown) {
+        const error = e as AxiosError;
+        setIsError(error.message);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      }
+    };
+    if (search) fetchProducts();
+  }, [search]);
+
   return {
     products,
     isLoading,
@@ -47,5 +68,7 @@ export default function useProducts() {
     limit,
     setSkip,
     viewedProducts,
+    search,
+    setSearch,
   };
 }

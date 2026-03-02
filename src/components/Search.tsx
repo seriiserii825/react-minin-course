@@ -1,4 +1,10 @@
+import useProducts from "../hooks/useProducts";
+
 export default function Search() {
+  const { search, setSearch } = useProducts();
+  function onSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearch(e.target.value.trim());
+  }
   return (
     <div className="flex-1 max-w-md">
       <div className="flex items-center bg-white/20 border border-white/30 rounded-full px-4 py-2.5 gap-2 focus-within:bg-white/30 transition-colors">
@@ -16,7 +22,9 @@ export default function Search() {
         </svg>
         <input
           type="text"
-          placeholder="Поиск товаров..."
+          value={search}
+          onChange={onSearchChange}
+          placeholder="Search products..."
           className="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full"
         />
       </div>
