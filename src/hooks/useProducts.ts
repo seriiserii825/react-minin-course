@@ -13,7 +13,6 @@ export default function useProducts() {
   const [viewedProducts, setViewedProducts] = useState<number>(24);
 
   useEffect(() => {
-    setViewedProducts(skip + limit);
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
@@ -25,6 +24,7 @@ export default function useProducts() {
         setProducts(res.products);
         setTotal(res.total);
         setSkip(res.skip);
+        setViewedProducts(res.skip + res.limit);
       } catch (e: unknown) {
         const error = e as AxiosError;
         setIsError(error.message);
