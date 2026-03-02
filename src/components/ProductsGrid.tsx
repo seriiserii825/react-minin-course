@@ -13,9 +13,15 @@ interface IProductsProps {
   total: number;
   viewedProducts: number;
   createProduct?: () => void;
+  showSort?: boolean;
 }
 
-export default function ProductsGrid({ products, total, viewedProducts }: IProductsProps) {
+export default function ProductsGrid({
+  products,
+  total,
+  viewedProducts,
+  showSort,
+}: IProductsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
@@ -54,7 +60,7 @@ export default function ProductsGrid({ products, total, viewedProducts }: IProdu
           </span>
         </div>
 
-        <ProductsOrder />
+        {showSort && <ProductsOrder />}
       </header>
       <div ref={containerRef} className="grid grid-cols-4 gap-2 mx-auto">
         {products.map((product) => (

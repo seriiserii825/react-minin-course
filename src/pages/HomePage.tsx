@@ -37,6 +37,7 @@ export default function HomePage() {
           products={products}
           total={total}
           viewedProducts={viewedProducts}
+          showSort={true}
         />
         {total > limit && (
           <Pagination total={total} skip={skip} limit={limit} onPageChange={onPageChange} />
