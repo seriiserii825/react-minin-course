@@ -3,17 +3,24 @@ import Product from "./Product";
 
 interface IProductsProps {
   products: IProduct[];
+  total: number;
+  viewedProducts: number;
   createProduct: () => void;
 }
 
-export default function ProductsGrid({ products, createProduct }: IProductsProps) {
+export default function ProductsGrid({
+  products,
+  createProduct,
+  total,
+  viewedProducts,
+}: IProductsProps) {
   return (
     <>
       <header className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-3">
           <h2 className="text-2xl text-white font-bold">Products</h2>
           <span className="bg-white/25 text-white text-sm font-semibold px-3 py-1 rounded-full">
-            {products.length}
+            {viewedProducts}/{total}
           </span>
         </div>
 
