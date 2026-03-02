@@ -23,26 +23,24 @@ export default function HomePage() {
     setSkip((newPage - 1) * limit);
   }
 
+  if (isLoading) return <Preloader />;
+  if (isError) return <p className="text-white text-center font-bold">{isError}</p>;
+  if (products.length === 0)
+    return <p className="text-white text-center font-bold">No products found</p>;
+
   return (
-    <div className="min-h-[50vh] pb-10">
-      <div className="container mx-auto">
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <>
-            <ProductsGrid
-              createProduct={() => setIsModalOpen(true)}
-              products={products}
-              total={total}
-              viewedProducts={viewedProducts}
-            />
-            {total > limit && (
-              <Pagination total={total} skip={skip} limit={limit} onPageChange={onPageChange} />
-            )}
-          </>
+    <div className="pb-10">
+      <>
+        <ProductsGrid
+          createProduct={() => setIsModalOpen(true)}
+          products={products}
+          total={total}
+          viewedProducts={viewedProducts}
+        />
+        {total > limit && (
+          <Pagination total={total} skip={skip} limit={limit} onPageChange={onPageChange} />
         )}
-        {isError && <p className="text-white text-center font-bold">{isError}</p>}
-      </div>
+      </>
       {isModalOpen && (
         <Modal title="Create New Product">
           <CreateProduct onCreate={() => setIsModalOpen(false)} />

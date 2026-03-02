@@ -40,8 +40,10 @@ export default function useProducts() {
         }, 1000);
       }
     };
-    fetchProducts();
-  }, [skip]);
+    if (debouncedSearch === "") {
+      fetchProducts();
+    }
+  }, [skip, debouncedSearch]);
 
   useEffect(() => {
     const fetchProducts = async () => {
