@@ -10,7 +10,7 @@ export default function MainHeader() {
     <header className="w-full absolute top-0 left-0 z-50">
       <div className="container mx-auto">
         <div className="py-4 flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 mr-auto">
             <Logo />
           </Link>
           <Search />

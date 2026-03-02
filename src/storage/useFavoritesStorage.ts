@@ -1,4 +1,5 @@
 import { create, type StateCreator } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface IActions {
   setFavorites: (value: number) => void;
@@ -27,7 +28,12 @@ const productsStore: StateCreator<IFavoritesState> = (set) => ({
   },
 });
 
-const useFavoritesStorage = create<IFavoritesState>(productsStore);
+const useFavoritesStorage = create<IFavoritesState>()(
+  persist(productsStore, {
+    name: "favorites-storage",
+    storage: createJSONStorage(() => localStorage),
+  }),
+);
 
 export const useFavorites = () => useFavoritesStorage((state) => state.favorites);
-export const useSetSearch = () => useFavoritesStorage((state) => state.setFavorites);
+export const useSetFavorites = () => useFavoritesStorage((state) => state.setFavorites);

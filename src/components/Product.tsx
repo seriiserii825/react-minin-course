@@ -2,6 +2,8 @@ import { useState } from "react";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
 import { Link } from "react-router-dom";
+import FavoritesBtn from "./FavoritesBtn";
+import IconLike from "../icons/IconLike";
 
 interface ProductProps {
   product: IProduct;
@@ -36,6 +38,9 @@ export default function Product({ product }: ProductProps) {
 
         <span className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-medium px-2.5 py-1 rounded-full uppercase tracking-wide">
           {product.category}
+        </span>
+        <span className="absolute top-2 right-3 w-8 h-10 text-white text-xs font-medium">
+          <IconLike />
         </span>
       </div>
 
