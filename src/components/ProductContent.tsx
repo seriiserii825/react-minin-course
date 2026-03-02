@@ -1,4 +1,8 @@
-import { useSetMiniCartProducts } from "@/store/useMiniCartStorage";
+import {
+  useMiniCartProducts,
+  useSetIsMiniCartOpen,
+  useSetMiniCartProducts,
+} from "@/store/useMiniCartStorage";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
 
@@ -8,6 +12,17 @@ interface IProductContentProps {
 
 export default function ProductContent({ product }: IProductContentProps) {
   const setProductsToMiniCart = useSetMiniCartProducts();
+  const setIsOpen = useSetIsMiniCartOpen();
+
+  function productIsInMiniCart() {
+    const miniCartProducts = useMiniCartProducts();
+    return miniCartProducts.some((miniCartProduct) => miniCartProduct.id === product.id);
+  }
+
+  function addToMiniCart() {
+    setProductsToMiniCart(product);
+    setIsOpen(true);
+  }
 
   return (
     <div className="flex flex-col gap-5">
@@ -48,7 +63,8 @@ export default function ProductContent({ product }: IProductContentProps) {
 
       <div className="flex gap-4 mt-4">
         <button
-          onClick={() => setProductsToMiniCart(product)}
+          disabled={productIsInMiniCart()}
+          onClick={addToMiniCart}
           className="flex-1 cursor-pointer bg-indigo-600 text-white py-3 rounded-xl font-medium hover:bg-indigo-700 transition">
           Add to cart
         </button>

@@ -215,3 +215,7 @@
     @apply bg-background text-foreground;
   }
 }
+button:disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+
