@@ -1,42 +1,20 @@
+import NotFoundProduct from "../components/NotFoundProduct";
 import Preloader from "../components/Preloader";
+import ProductSlider from "../components/ProductSlider";
 import useSingleProduct from "../hooks/useSingleProduct";
 
 export default function SingleProductPage() {
   const { product, loading } = useSingleProduct();
   if (loading) return <Preloader />;
   if (!product) {
-    return (
-      <div className="text-center py-20">
-        <h2 className="text-2xl font-bold text-gray-900">Product not found</h2>
-        <p className="text-gray-600 mt-4">The product you are looking for does not exist.</p>
-      </div>
-    );
+    return <NotFoundProduct />;
   }
 
   return (
     <div>
       <div className="max-w-6xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-2xl shadow-lg p-8">
-          <div>
-            <div className="rounded-xl overflow-hidden border mb-4">
-              <img
-                src={product.thumbnail}
-                alt="Essence Mascara Lash Princess"
-                className="w-full h-96 object-contain bg-gray-50"
-              />
-            </div>
-            {product.images && product.images.length > 0 && (
-              <div className="flex gap-3">
-                {product.images.map((imgUrl, index) => (
-                  <img
-                    key={index}
-                    src={imgUrl}
-                    className="w-20 h-20 object-contain border rounded-lg cursor-pointer"
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductSlider images={product.images} />
 
           <div className="flex flex-col gap-5">
             <span className="w-fit px-4 py-1 rounded-full bg-indigo-600 text-white text-xs uppercase tracking-wide">
